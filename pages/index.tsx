@@ -1,58 +1,47 @@
-import Container from '../components/container'
-import MoreStories from '../components/more-stories'
-import HeroPost from '../components/hero-post'
-import Intro from '../components/intro'
 import Layout from '../components/layout'
-import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
-import Post from '../types/post'
+import { VideoJS } from '../components/videojs'
 
-type Props = {
-  allPosts: Post[]
-}
+const Index = () => {
 
-const Index = ({ allPosts }: Props) => {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+  const videoJsOptions = {
+    preload: true,
+    autoplay: true,
+    controls: false,
+    responsive: true,
+    fluid: true,
+    loop: true,
+    muted: true,
+    techOrder: ['youtube'],
+    sources: [{
+      src: 'https://www.youtube.com/watch?v=FpR5v5c4a-c',
+      type: 'video/youtube'
+    }],
+    youtube: {
+      customVars: {
+        wmode: "transparent",
+        iv_load_policy: 3,
+        modestbranding: 0,
+      }
+    }
+  };
+
   return (
     <>
       <Layout>
         <Head>
           <title>Next.js Blog Example with {CMS_NAME}</title>
         </Head>
-        <Container>
-          <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-            />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-        </Container>
+        <div id='hero' className='relative h-screen overflow-hidden'>
+          <div className="videoContainer">
+            <VideoJS options={videoJsOptions} />
+          </div>
+          <div className='absolute inset-0 z-10'></div>
+        </div>
       </Layout>
     </>
   )
 }
 
 export default Index
-
-export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
-  ])
-
-  return {
-    props: { allPosts },
-  }
-}

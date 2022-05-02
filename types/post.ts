@@ -4,6 +4,8 @@ type PostType = {
   slug: string
   title: string
   date: string
+  type: string
+  youtubeUri: string
   coverImage: string
   author: Author
   excerpt: string
