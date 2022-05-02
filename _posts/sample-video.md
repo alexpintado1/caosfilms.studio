@@ -1,7 +1,7 @@
 ---
-title: 'Dynamic Routing and Static Generation'
+title: 'REEL'
 coverImage: '/assets/blog/dynamic-routing/cover.jpg'
-date: '2020-03-16T05:35:07.322Z'
+date: '2022-05-02T00:00:00.000Z'
 type: VIDEO
-youtubeUri: 
+youtubeUri: 'https://www.youtube.com/watch?v=FpR5v5c4a-c' 
 ---
